@@ -14,7 +14,7 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
   tasks: any = [];
   listTeamOne: any = [];
   listTeamTwo: any = [];
-  public unsubscribe$ = new Subject();
+  // public unsubscribe$ = new Subject();
   constructor(
     public taskService: TaskService,
     public modalService: NgbModal
@@ -107,8 +107,8 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    // this.unsubscribe$.next();
+    // this.unsubscribe$.complete();
   }
 
 }
