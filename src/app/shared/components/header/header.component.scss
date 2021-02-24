@@ -1,0 +1,17 @@
+// @import "../../../../variables.scss";
+ul li {
+  list-style: none;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 1.7rem;
+  // color: $second-color;
+}
+
+header{
+  position: fixed;
+  top: 0;
+   z-index: 11;
+  transition: all 250ms ease-in-out;
+}
