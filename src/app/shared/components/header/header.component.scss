@@ -9,9 +9,14 @@ ul li {
   // color: $second-color;
 }
 
-header{
-  position: fixed;
-  top: 0;
-   z-index: 11;
-  transition: all 250ms ease-in-out;
+// header{
+//   position: fixed;
+//   top: 0;
+//    z-index: 11;
+//   transition: all 250ms ease-in-out;
+//   background: #00abad im !important;
+// }
+
+.bg-dark{
+  background: #00abad !important;
 }

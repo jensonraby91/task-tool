@@ -1,0 +1,57 @@
+<div class="modal-container">
+    <form [formGroup]="addTaskForm" (ngSubmit)="addTask()">
+        <div class="modal-header d-flex align-items-center">
+            <h5 *ngIf="!isEdit; else elseBlock" class="modal-title">Add Task</h5>
+            <ng-template #elseBlock>
+                <h5 class="modal-title">Update Task</h5> <span class="remaining ml-1">
+                    Remaining {{ data?.dueDate | amDifference: data.startDate :'days' : true }}
+                    days
+                </span>
+            </ng-template>
+            <button type="button" style="outline:0;" class="close" (click)="activeModal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-center">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputEmail4">Title</label>
+                            <input formControlName="title" type="email" class="form-control" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputPassword4">Seviority</label>
+                            <select class="form-control" formControlName="seviority">
+                                <option value="">Select Seviority</option>
+                                <option *ngFor="let each of seviorityType" [ngValue]="each.value">
+                                    {{each.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputPassword4">Due Date</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="dueDate" name="dp"
+                                    ngbDatepicker #d="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button [disabled]="isEdit" class="btn btn-outline-secondary calendar"
+                                        (click)="d.toggle()" type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button (click)="moveToDone()" [disabled]="remaningDays >0 ? false : true" type="button" class="btn btn-secondary mr-auto" type="button">close</button>
+            <button type="submit" class="btn btn-primary">
+                <span *ngIf="!isEdit; else elseContent">Save</span>
+                <ng-template #elseContent>
+                    <span>Update</span>
+                </ng-template>
+            </button>
+        </div>
+    </form>
+</div>

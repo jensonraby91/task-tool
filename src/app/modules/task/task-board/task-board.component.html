@@ -1,0 +1,76 @@
+<div class="row task-header m-0">
+    <div class="col-md-12">
+        <h3 class="text-center">Task Board</h3>
+    </div>
+    <div class="col-md-8">
+        <span>Total Task: <b>{{tasks?.length + listTeamOne.length}} </b> &nbsp;&nbsp;</span>
+        <span>To Do Task:<b>{{tasks?.length }} </b>&nbsp;&nbsp;</span>
+        <span>In Progress Task: <b>{{listTeamOne.length }} </b>&nbsp;&nbsp;</span>
+        <span>Completed Task: <b>{{listTeamTwo.length }}</b></span>
+    </div>
+    <div class="col-md-4 d-flex flex-row-reverse">
+        <button class="btn btn-primary" (click)="openAddTask()">Add Task</button>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-4">
+        <div class="card task-card">
+            <div class="card-header">
+                To Do
+            </div>
+            <div class="card-body scroll-list" dnd-sortable-container [dropZones]="['boxers-zone']"
+                [sortableData]="tasks">
+                <ul class="list-group">
+                    <li *ngFor="let item of tasks; let i = index" [dragEnabled]="getEnabledStatus(item)" dnd-droppable
+                        (onDropSuccess)="addTo($event, item, 'ToDo')" (click)="openTask(item, 'ToDo', i)"
+                        class="list-group-item" dnd-sortable [sortableIndex]="i">
+                        {{item.title}}
+                        <div class="remaining">
+                            Remaining {{ item.dueDate | amDifference: item.startDate :'days' : true }}
+                            days
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card " dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamOne">
+            <div class="card-header">
+                In Progress
+            </div>
+            <div class="card-body scroll-list">
+                <ul class="list-group">
+                    <li *ngFor="let item of listTeamOne; let i = index" (click)="openTask(item, 'Inprogress', i)"
+                        (onDropSuccess)="addTo($event, item, 'Inprogress')" class="list-group-item" dnd-sortable
+                        [sortableIndex]="i">
+                        {{item.title}}
+                        <div class="remaining">
+                            Remaining {{ item.dueDate | amDifference: item.startDate :'days' : true }}
+                            days
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card " dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamTwo">
+            <div class="card-header">
+                Completed
+            </div>
+            <div class="card-body scroll-list">
+                <ul class="list-group">
+                    <li *ngFor="let item of listTeamTwo; let i = index" dnd-droppable
+                        (onDropSuccess)="addTo($event, item, 'Completed')" (click)="openTask(item, 'Completed', i)"
+                        class="list-group-item" dnd-sortable [sortableIndex]="i">
+                        {{item.title}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+
+    </div>
+</div>
